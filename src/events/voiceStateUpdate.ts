@@ -1,4 +1,4 @@
-import { Channel, channelMention, ChannelType, EmbedBuilder, EmbedField, EmbedFooterOptions, Guild, GuildMember, TextChannel } from 'discord.js'
+import { Channel, channelMention, ChannelType, EmbedBuilder, EmbedField, EmbedFooterOptions, Guild, GuildMember, Role, TextChannel, User } from 'discord.js'
 import { ArgsOf } from 'discordx'
 import { GuildSettingsManager } from 'src/services/GuildSettingsManager'
 
@@ -66,6 +66,14 @@ export default class VoiceStateUpdateEvent {
 			}
 		})
 
+		if (fields.length === 0) {
+			fields.push({
+				name: 'Niemand da :frowning:',
+				value: this.createEmptyInfoForEmbedField(guild),
+				inline: true,
+			})
+		}
+
 		embed.addFields(fields)
 
 		return embed
@@ -77,11 +85,43 @@ export default class VoiceStateUpdateEvent {
 		const user = member.user
 		const memberVoice = member.voice
 
-		const userMention = `<@${user.id}>`
+		const userMention = this.nicknameMention(user)
 		const deafenedOrMuted = memberVoice.deaf || memberVoice.mute ? emojis[0] : ''
 		const streaming = memberVoice.streaming || memberVoice.selfVideo ? emojis[1] : ''
 
 		return `${userMention} ${deafenedOrMuted} ${streaming}`
+	}
+
+	private createEmptyInfoForEmbedField(guild: Guild): string {
+		let text = 'Ich werd immer so melancholisch wenn niemand da ist :frowning:'
+
+		try {
+			const randomUser = guild.members.cache.filter(
+				(member: GuildMember) =>
+					!member?.user?.bot
+					&& member.presence
+					&& member.presence.status !== 'offline'
+					&& member.roles.cache.size > 0
+			).random()
+
+			if (randomUser) {
+				const randomUserRole = randomUser.roles.cache.filter(
+					(role: Role) => role.name !== '@everyone'
+				).random()
+
+				if (randomUserRole) {
+					text = `Frag doch mal ${this.nicknameMention(randomUser.user)}, ob er/sie Lust hat \`${randomUserRole.name}\` zu zocken.`
+				}
+			}
+		} catch (error: any) {
+			this.logger.log(error, 'error')
+		}
+
+		return text
+	}
+
+	private nicknameMention(user: User): string {
+		return `<@${user.id}>`
 	}
 
 	private async updateVoiceChannelActivityEmbed(guild: Guild, embed: EmbedBuilder) {

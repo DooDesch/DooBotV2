@@ -165,18 +165,26 @@
           "length": 0,
           "mappedType": "datetime"
         },
-        "voice_channel_message_id": {
-          "name": "voice_channel_message_id",
+        "setting": {
+          "name": "setting",
           "type": "text",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "default": "''",
+          "mappedType": "text"
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
           "mappedType": "text"
         }
       },
-      "name": "guild_settings",
+      "name": "guild_setting",
       "indexes": [
         {
           "keyName": "primary",

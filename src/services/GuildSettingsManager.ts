@@ -1,7 +1,7 @@
 import { EntityRepository } from '@mikro-orm/core'
 
 import { Service } from '@/decorators'
-import { GuildSetting as GuildSettingEntity, GuildSettingRepository } from '@/entities'
+import { GuildSetting as GuildSettingEntity } from '@/entities'
 
 import { Database } from '.'
 
@@ -25,7 +25,7 @@ export class GuildSettingsManager {
 	 * @param guildId
 	 */
 	async getGuildSettingByGuildId(guildId: string, setting: GuildSettingType) {
-		return await this.guildSettingsRepo.findOne({ setting, id: guildId })
+		return await this.db.get(GuildSettingEntity).findOne({ setting, id: guildId })
 	}
 
 	/**
