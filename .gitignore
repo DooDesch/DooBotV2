@@ -4,6 +4,8 @@ node_modules/
 # secrets
 .env
 .env.local
+.credentials
+.credentials.json
 
 # build
 build/
