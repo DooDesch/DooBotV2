@@ -40,7 +40,7 @@ services:
   # ==== MySQL database ====
 
   # database:
-  #   image: mysql # or `mariadb`
+  #   image: mariadb # or `mysql`
   #   container_name: database
   #   restart: always
   #   volumes:

@@ -2,6 +2,7 @@ import process from 'node:process'
 
 import { EntityRepository } from '@mikro-orm/core'
 import { constant } from 'case'
+import { GuildMember } from 'discord.js'
 import { Client, SimpleCommandMessage } from 'discordx'
 import osu from 'node-os-utils'
 import pidusage from 'pidusage'
@@ -90,6 +91,22 @@ export class Stats {
 	}
 
 	/**
+	 * Record a voice state update and add it to the database.
+	 * @param member
+	 */
+	async registerVoiceStateUpdate(member: GuildMember) {
+		const type = 'VOICE_STATE_UPDATE'
+		const value = member.voice.channel?.id || 'LEAVE'
+		const additionalData = {
+			user: member.id,
+			guild: member.guild.id,
+			channel: value,
+		}
+
+		await this.register(type, value, additionalData)
+	}
+
+	/**
 	 * Returns an object with the total stats for each type.
 	 */
 	async getTotalStats() {
@@ -98,6 +115,7 @@ export class Stats {
 			TOTAL_GUILDS: this.client.guilds.cache.size,
 			TOTAL_ACTIVE_USERS: await this.db.get(User).count(),
 			TOTAL_COMMANDS: await this.statsRepo.count(allInteractions),
+			TOTAL_VOICE_STATE_UPDATES: await this.statsRepo.count({ type: 'VOICE_STATE_UPDATE' }),
 		}
 
 		return totalStatsObj

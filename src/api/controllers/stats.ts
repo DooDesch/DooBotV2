@@ -31,6 +31,7 @@ export class StatsController extends BaseController {
 				totalGuilds: totalStats.TOTAL_GUILDS,
 				totalActiveUsers: totalStats.TOTAL_ACTIVE_USERS,
 				totalCommands: totalStats.TOTAL_COMMANDS,
+				totalVoiceStateUpdates: totalStats.TOTAL_VOICE_STATE_UPDATES,
 			},
 		}
 	}

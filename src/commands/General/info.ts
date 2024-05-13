@@ -77,7 +77,7 @@ export default class InfoCommand {
 		const totalStats = await this.stats.getTotalStats()
 		fields.push({
 			name: 'Totals',
-			value: `**${totalStats.TOTAL_GUILDS}** guilds\n**${totalStats.TOTAL_USERS}** users\n**${totalStats.TOTAL_COMMANDS}** commands`,
+			value: `**${totalStats.TOTAL_GUILDS}** guilds\n**${totalStats.TOTAL_USERS}** users\n**${totalStats.TOTAL_COMMANDS}** commands\n**${totalStats.TOTAL_VOICE_STATE_UPDATES}** voice state updates`,
 			inline: true,
 		})
 
