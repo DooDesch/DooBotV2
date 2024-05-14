@@ -21,8 +21,8 @@ export class GuildSettingsManager {
 
 	/**
 	 * Get a setting by guildId and setting name.
-	 * @param setting
 	 * @param guildId
+	 * @param setting
 	 */
 	async getGuildSettingByGuildId(guildId: string, setting: GuildSettingType) {
 		return await this.db.get(GuildSettingEntity).findOne({ setting, id: guildId })
@@ -30,8 +30,8 @@ export class GuildSettingsManager {
 
 	/**
 	 * Update a setting by guildId and setting name.
-	 * @param setting
 	 * @param guildId
+	 * @param setting
 	 * @param value
 	 */
 	async updateGuildSettingByGuildId(guildId: string, setting: GuildSettingType, value: string) {

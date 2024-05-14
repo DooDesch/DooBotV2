@@ -40,7 +40,7 @@ export default class VoiceStateUpdateEvent {
 		const rolesChannel = guild.channels.cache.find(ch => ch.name === 'roles')
 		embed.setTitle(':speaking_head: User in Voice-Channel')
 		if (rolesChannel)
-		    embed.setDescription(`${channelMention(rolesChannel.id)} <- hier findest du alle Rollen.\n\n_____`)
+			embed.setDescription(`${channelMention(rolesChannel.id)} <- hier findest du alle Rollen.\n\n_____`)
 		embed.setColor('#0099ff')
 		embed.setTimestamp()
 		const footerOptions: EmbedFooterOptions = {
