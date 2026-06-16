@@ -16,6 +16,9 @@
 
 # What is TSCord
 
+> 🛟 **Need help or found a bug?** Get support at [support.doodesch.de](https://support.doodesch.de).
+
+
 #### **TSCord** is a fully-featured **[discord bot](https://discord.com/developers/docs/intro#bots-and-apps)** *template* written in [Typescript](https://www.typescriptlang.org/), intended to provide a framework that's easy to use, extend and modify.
 
 It uses [`discordx`](https://github.com/discordx-ts/discordx) and [`discord.js v14`](https://github.com/discordjs/discord.js) under the hood to simplify the development of discord bots.
